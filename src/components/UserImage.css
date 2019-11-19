@@ -1,0 +1,23 @@
+#user-image {
+    display: block;
+    margin-left: auto;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    max-width: 40px;
+    z-index: 2;
+}
+#logout-button {
+    margin: 0.1em 0;
+    font: bold 14px "Lucida Console", Monaco, monospace;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    background-color:white;
+    z-index: 2;
+}
+#logout-button:hover {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+#logout-button:active {
+    background-color: #dbdbdb;
+}

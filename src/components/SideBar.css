@@ -1,0 +1,81 @@
+@media all and (min-width: 801px) {
+    .side-bar {
+        width: 500px;
+    }
+    .side-bar-toggle.visible {
+        left: 500px;
+    }
+    #datepicker-max {
+        float: right;
+    }
+    .side-bar.hidden {
+        left: -500px;
+    }
+}
+@media all and (max-width: 800px) {
+    .side-bar {
+        width: 85%;
+    }
+    .side-bar-toggle.visible {
+        left: 85%;
+    }
+    #datepicker-max {
+        float: left;
+    }
+    .side-bar.hidden {
+        left: -85%;
+    }
+}
+.side-bar {
+    position: absolute;
+    overflow-y: auto;
+    padding: 1em 1em 1em 1em;
+    height: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: white;
+    z-index: 2;
+    -webkit-transition: left 0.2s;
+    transition: left 0.2s;
+}
+.side-bar.visible {
+    left: 0px;
+    box-shadow: 5px 0px 5px rgba(0,0,0,0.1);
+}
+.side-bar-toggle {
+    position: absolute;
+    top:25px;
+    height: 50px;
+    width: 25px;
+    z-index: 3;
+    opacity: 0.8;
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-radius: 0 8px 8px 0;
+    transition: left 0.2s, opacity 0.1s;
+    -webkit-transition: left 0.2s, opacity 0.1s;
+    cursor: pointer;
+}
+.side-bar-toggle:hover {
+    opacity: 1;
+}
+.side-bar-toggle.hidden {
+    left: 0px;
+}
+.toggle-arrow {
+    position: relative;
+    top: 9px;
+    left: -3px;
+    color: rgb(100, 100, 100);
+}
+.filter-container {
+    border: 1px solid rgba(34,36,38,.15);
+    padding: 0.5em;
+    border-radius: 0.3rem;
+    overflow: hidden;
+}
+#datepicker-max {
+    padding: 1em;
+}
