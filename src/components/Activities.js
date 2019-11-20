@@ -1,12 +1,14 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import{ handleResponse, cleanActivityData } from '../helpers';
-import { API_URL_Nick } from '../config';
+import { API_URL_NicksActivities } from '../config';
 import MapAndSideBar from './MapAndSideBar';
 import Loading from './Loading';
 
 class Activities extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             allActivities: [],
             allActivityTypes: [],
@@ -22,7 +24,7 @@ class Activities extends React.Component {
 
     fetchActivities = () => {
 
-        fetch(API_URL_Nick)
+        fetch(API_URL_NicksActivities)
             .then(handleResponse)
             .then((result) => {
                 const activities = cleanActivityData(result.activities)
@@ -70,9 +72,9 @@ class Activities extends React.Component {
                 </div>
             );
         } else {
-            return (<div className='loading-container'><Loading width='36px' height='36px' /></div>)
+            return (<div className='loading-container'><Loading width='48px' height='48px' /></div>)
         }
     }
 }
 
-export default Activities;
+export default withRouter(Activities);

@@ -1,7 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import Plot from 'react-plotly.js';
 import { handleResponse } from '../helpers';
-import { API_URL_StravaStreams } from '../config';
+import { API_URL_NicksStreams, API_URL_StravaStreams } from '../config';
 import Loading from './Loading';
 
 class ActivityPlot extends React.Component {
@@ -37,8 +38,8 @@ class ActivityPlot extends React.Component {
     }
 
     getActivityStreams = (id) => {
-        //console.log('getActivityStreams')
-        fetch(`${API_URL_StravaStreams}/${id}`, {  credentials: 'include' })
+        const streamsURL = this.props.location.pathname.indexOf('NicksActivities') > -1 ? API_URL_NicksStreams : API_URL_StravaStreams;
+        fetch(`${streamsURL}/${id}`, {  credentials: 'include' })
             .then(handleResponse)
             .then((result) => {
                 //console.log('result', result)
@@ -66,7 +67,7 @@ class ActivityPlot extends React.Component {
 
         return(
             <div>
-                { loading && <div><Loading
+                { loading && <div className='loading-container'><Loading
                     width='36px'
                     height='36px' /></div> }
                 { !loading && this.props.selectedActivity && <Plot
@@ -105,4 +106,4 @@ class ActivityPlot extends React.Component {
     }
 }
 
-export default ActivityPlot;
+export default withRouter(ActivityPlot);

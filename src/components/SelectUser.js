@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import stravaConnectImg from '../images/btn_strava_connectwith_light.svg';
 import './SelectUser.css';
+import { API_Domain } from '../config';
 
 const SelectUser = (props) => {
     const { history } = props;
@@ -21,7 +22,7 @@ const SelectUser = (props) => {
                     alt='Connect with Strava'
                     draggable='false'
                     src={stravaConnectImg}
-                    onClick={() => window.location.href = "http://localhost:3001/auth/strava"} /></div>
+                    onClick={() => window.location.href = `${API_Domain}/auth/strava`} /></div>
         </div>
     )
 }

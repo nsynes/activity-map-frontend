@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import './SideBar.css';
 import ArrowRight from '@material-ui/icons/ArrowRight';
 import ArrowLeft from '@material-ui/icons/ArrowLeft';
@@ -148,4 +149,4 @@ const SideBar = (props) => {
 }
 
 
-export default SideBar;
+export default withRouter(SideBar);

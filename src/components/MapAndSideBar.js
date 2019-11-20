@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import SideBar from './SideBar';
 import Map from './LeafletMap';
 
@@ -169,4 +170,4 @@ class MapAndSideBar extends React.Component {
     }
 }
 
-export default MapAndSideBar;
+export default withRouter(MapAndSideBar);

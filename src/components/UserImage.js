@@ -1,5 +1,6 @@
 import React from 'react';
 import './UserImage.css';
+import { API_Domain } from '../config';
 
 const UserImage = (props) => {
 
@@ -14,7 +15,7 @@ const UserImage = (props) => {
                 src={photoPath}/>
             <button
                 id='logout-button'
-                onClick={() => window.location.href = "http://localhost:3001/auth/logout"}>Log Out</button>
+                onClick={() => window.location.href = `${API_Domain}/auth/logout`}>Log Out</button>
         </div>
     )
 }

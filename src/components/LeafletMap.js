@@ -4,6 +4,7 @@ import LocateControl from './LocateControl';
 import './LeafletMap.css';
 import { getMarkerPin } from './MarkerPin';
 import { getColour } from '../helpers';
+import { URL_Map_Tiles } from '../config';
 
 class Map extends React.Component {
 
@@ -89,7 +90,7 @@ class Map extends React.Component {
                     <ZoomControl position='bottomright' />
                     <LocateControl />
                     <TileLayer
-                    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+                    url={URL_Map_Tiles}
                     />
                     {activityGeoJson.length > 0 && activityGeoJson}
                     {markers}

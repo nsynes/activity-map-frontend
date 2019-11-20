@@ -1,12 +1,13 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import{ handleResponse, cleanActivityData } from '../helpers';
 import { API_URL_StravaActivities, API_URL_StravaPhoto } from '../config';
 import MapAndSideBar from './MapAndSideBar';
 import Loading from './Loading';
 
 class StravaActivities extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             allActivities: [],
             allActivityTypes: [],
@@ -89,9 +90,9 @@ class StravaActivities extends React.Component {
                 </div>
             );
         } else {
-            return (<div className='loading-container'><Loading width='36px' height='36px' /></div>)
+            return (<div className='loading-container'><Loading width='48px' height='48px' /></div>)
         }
     }
 }
 
-export default StravaActivities;
+export default withRouter(StravaActivities);
