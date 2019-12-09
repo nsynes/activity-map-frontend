@@ -9,8 +9,8 @@ const SelectUser = (props) => {
     const { history } = props;
 
     return(
-        <div align='center'>
-            <div style={{paddingTop: '20%'}}>
+        <div align='center' style={{width: '100%', height: '100vh', background: 'radial-gradient(80% 80% at center, grey, #383838)'}}>
+            <div style={{paddingTop: '43vh'}}>
                 <Button
                     variant='contained'
                     onClick={() => history.push('/NicksActivities')}>
