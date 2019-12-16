@@ -72,6 +72,7 @@ class Map extends React.Component {
         return (
             <div style={{width: '100%'}}>
                 <LeafletMap
+                    preferCanvas={true}
                     ref='map'
                     style={{height: windowHeight}}
                     center={[55.8, -4.5]}
