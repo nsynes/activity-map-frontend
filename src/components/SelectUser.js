@@ -9,11 +9,11 @@ const SelectUser = (props) => {
     const { history } = props;
 
     return(
-        <div align='center' style={{width: '100%', height: '100vh', background: 'radial-gradient(80% 80% at center, grey, #383838)'}}>
-            <div style={{paddingTop: '40vh'}}>
-                <h1 id='main-title'>
-                    Activity Mapping
-                </h1>
+        <div align='center' style={{width: '100%', height: '100vh', background: 'radial-gradient(80% 80% at center, #ececec, white)'}}>
+            <h1 id='main-title'>
+                Activity Mapping
+            </h1>
+            <div style={{position:'relative'}}>
                 <Button
                     id='view-nick'
                     variant='contained'
@@ -26,7 +26,8 @@ const SelectUser = (props) => {
                     alt='Connect with Strava'
                     draggable='false'
                     src={stravaConnectImg}
-                    onClick={() => window.location.href = `${API_Domain}/auth/strava`} /></div>
+                    onClick={() => window.location.href = `${API_Domain}/auth/strava`} />
+            </div>
         </div>
     )
 }

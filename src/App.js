@@ -12,7 +12,7 @@ const App = () => {
             <div>
                 <Switch>
                     <Route path="/" component={SelectUser} exact />
-                    <Route path="/NicksActivities" component={Activities} exact />
+                    <Route path="/NicksActivities/:name?" component={Activities} exact />
                     <Route path="/StravaActivities" component={StravaActivities} exact />
                 </Switch>
             </div>

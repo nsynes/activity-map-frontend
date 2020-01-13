@@ -9,6 +9,8 @@ class Activities extends React.Component {
     constructor(props) {
         super(props);
 
+        //console.log('Nicks Activities', props.match.params.name);
+
         this.state = {
             allActivities: [],
             allActivityTypes: [],

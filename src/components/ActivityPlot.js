@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Plot from 'react-plotly.js';
 import { handleResponse } from '../helpers';
-import { API_URL_NicksStreams, API_URL_StravaStreams } from '../config';
+import { API_URL_NicksStreams, API_URL_StravaStreams, API_URL_GetActivity, API_URL_GetActivityPhotos } from '../config';
 import Loading from './Loading';
 
 class ActivityPlot extends React.Component {
@@ -28,6 +28,8 @@ class ActivityPlot extends React.Component {
         if (this.props.selectedActivity !== prevProps.selectedActivity) {
             this.setState({loading: true});
             this.getActivityStreams(this.props.selectedActivity);
+            this.getActivity(this.props.selectedActivity)
+            //this.getActivityPhotos(this.props.selectedActivity)
         }
     }
 
@@ -35,6 +37,22 @@ class ActivityPlot extends React.Component {
         //console.log('shouldComponentUpdate props', nextProps, this.props)
         //console.log('shouldComponentUpdate state', nextState, this.state)
         return true
+    }
+
+    getActivity = (id) => {
+        fetch(`${API_URL_GetActivity}/${id}`, {  credentials: 'include' })
+            .then(handleResponse)
+            .then((result) => {
+                console.log('getActivity', result)
+            })
+    }
+
+    getActivityPhotos = (id) => {
+        fetch(`${API_URL_GetActivityPhotos}/${id}`, {  credentials: 'include' })
+            .then(handleResponse)
+            .then((result) => {
+                console.log('getActivityPhotos', result)
+            })
     }
 
     getActivityStreams = (id) => {
