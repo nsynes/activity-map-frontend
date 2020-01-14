@@ -10,6 +10,7 @@ class Map extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             windowHeight: window.innerHeight
         }
@@ -34,23 +35,21 @@ class Map extends React.Component {
 
     render() {
         const { windowHeight } = this.state;
-        const { activities, startEndPoints } = this.props;
+        const { filteredActivities, startEndPoints } = this.props;
 
         const activityGeoJson = [];
-        if ( activities.length > 0) {
-            activities.forEach((activity, activityIndex) => {
-                if ( this.props.filter(activity) ) {
-                    activityGeoJson.push(
-                        <GeoJSON
-                            data={activity}
-                            key={activity.properties.id}
-                            ref={`geoJson${activityIndex}`}
-                            style={this.styleGeoJson}
-                            onEachFeature={(feature, layer) => {this.stylePopups(feature, layer)}}
-                            onClick={(event) => {this.props.selectActivity(event)}}
-                        />
-                    )
-                }
+        if ( filteredActivities.length > 0 ) {
+            filteredActivities.forEach((activity) => {
+                activityGeoJson.push(
+                    <GeoJSON
+                        data={activity}
+                        key={activity.properties.id}
+                        ref={`geoJson${activity.properties.id}`}
+                        style={this.styleGeoJson}
+                        onEachFeature={(feature, layer) => {this.stylePopups(feature, layer)}}
+                        onClick={(event) => {this.props.selectActivity(event)}}
+                    />
+                )
             })
         }
         var markers = [];

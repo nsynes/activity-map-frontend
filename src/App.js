@@ -13,7 +13,7 @@ const App = () => {
                 <Switch>
                     <Route path="/" component={SelectUser} exact />
                     <Route path="/NicksActivities/:name?" component={Activities} exact />
-                    <Route path="/StravaActivities" component={StravaActivities} exact />
+                    <Route path="/StravaActivities" component={StravaActivities} />
                 </Switch>
             </div>
         </BrowserRouter>

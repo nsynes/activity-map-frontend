@@ -9,10 +9,10 @@ class MapAndSideBar extends React.Component {
 
         this.state = {
             sideBar: true,
+            filteredActivities: props.allActivities,
             activityTypes: props.allActivityTypes,
             date: {min: props.minDateLimit, max: props.maxDateLimit},
             duration: props.durationLimits,
-            name: '',
             selectedActivity: null,
             startEndPoints: null
         };
@@ -33,14 +33,21 @@ class MapAndSideBar extends React.Component {
     }
 
     filterName = (activity) => {
-        const parts = this.state.name.toLowerCase().replace('\'','').replace('-','').split(' ');
+        const parts = this.props.name.toLowerCase().replace('\'','').replace('-','').split(' ');
         return parts.every(function(part) {
             return part.length === 0 ? true : activity.properties.name.toLowerCase().replace('\'','').replace('-','').indexOf(part) > -1;
         });
     }
 
-    filter = (a) => {
+    filterActivity = (a) => {
         return this.filterType(a) && this.filterDate(a) && this.filterDuration(a) && this.filterName(a);
+    }
+
+    filterActivities = (nextProps) => {
+        if ( nextProps.allActivities.length > 0) {
+            const filteredActivities = nextProps.allActivities.filter((activity) => this.filterActivity(activity));
+            this.setState({ filteredActivities: filteredActivities })
+        }
     }
 
     setMinDate = (min) => {
@@ -60,10 +67,6 @@ class MapAndSideBar extends React.Component {
         if ( value.min >= min && value.max <= max ) {
             this.setState({ duration: value })
         }
-    }
-
-    setNameFilter = (e) => {
-        this.setState({ name: e.target.value })
     }
 
     handleActivityTypeChange = (e, {value}) => {
@@ -105,6 +108,11 @@ class MapAndSideBar extends React.Component {
 
 
     zoomToActivities = (e) => {
+        const { history } = this.props;
+        if ( history && this.props.user === 'nick' ) {
+            history.push(`/NicksActivities/${this.props.name}`);
+            this.props.getActivitySummary(this.props.name, this.state.filteredActivities.map((a) => a.properties).sort((a, b) => (a.start_date > b.start_date) ? 1 : -1));
+        }
         const refs = this.refs.mapContainer.refs;
         var minLat = 90, maxLat = -90, minLon = 180, maxLon = -180;
         var newBounds;
@@ -128,9 +136,24 @@ class MapAndSideBar extends React.Component {
         this.hideSideBar();
     }
 
+    componentDidMount = () => {
+        if ( this.props.name && this.props.name !== '' ) {
+            window.requestAnimationFrame(() => {
+                this.zoomToActivities();
+            })
+        }
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        this.filterActivities(nextProps);
+
+    }
+
     render() {
 
-        const { sideBar, activityTypes, date, duration, name, selectedActivity, startEndPoints } = this.state;
+        const { sideBar, filteredActivities, activityTypes, date, duration, selectedActivity, startEndPoints } = this.state;
+
+
 
         return (
             <div>
@@ -138,7 +161,7 @@ class MapAndSideBar extends React.Component {
                     sideBar={sideBar}
                     date={date}
                     duration={duration}
-                    name={name}
+                    name={this.props.name}
                     photo={this.props.photo}
                     selectedActivity={selectedActivity}
                     activityTypes={this.props.allActivityTypes}
@@ -149,7 +172,7 @@ class MapAndSideBar extends React.Component {
                     setMinDate={this.setMinDate}
                     setMaxDate={this.setMaxDate}
                     setDuration={this.setDuration}
-                    setNameFilter={this.setNameFilter}
+                    setNameFilter={this.props.setNameFilter}
                     toggleSideBar={this.toggleSideBar}
                     zoomToActivities={this.zoomToActivities} />
                 <Map
@@ -157,9 +180,8 @@ class MapAndSideBar extends React.Component {
                     activityTypes={activityTypes}
                     date={date}
                     duration={duration}
-                    name={name}
-                    activities={this.props.allActivities}
-                    filter={this.filter}
+                    name={this.props.name}
+                    filteredActivities={filteredActivities}
                     hideSideBar={this.hideSideBar}
                     selectedActivity={selectedActivity}
                     startEndPoints={startEndPoints}

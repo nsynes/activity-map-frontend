@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { withRouter } from 'react-router-dom';
 import{ handleResponse, cleanActivityData } from '../helpers';
 import { API_URL_NicksActivities } from '../config';
@@ -9,9 +10,11 @@ class Activities extends React.Component {
     constructor(props) {
         super(props);
 
-        //console.log('Nicks Activities', props.match.params.name);
+        const name = props.match.params.name ? props.match.params.name : '';
 
         this.state = {
+            name: name,
+            summaryText: '',
             allActivities: [],
             allActivityTypes: [],
             minDateLimit: '',
@@ -22,6 +25,10 @@ class Activities extends React.Component {
 
     componentDidMount = () => {
         this.fetchActivities();
+    }
+
+    setNameFilter = (e) => {
+        this.setState({ name: e.target.value })
     }
 
     fetchActivities = () => {
@@ -57,14 +64,46 @@ class Activities extends React.Component {
             });
     }
 
+    getActivitySummary = (filterText, filteredActivities) => {
+        const names = filteredActivities.map((a) => a.name)
+        const types = filteredActivities.map((a) => a.type).filter((v, i, a) => a.indexOf(v) === i)
+        const activityTypeConversion = {
+            hike: 'hiking',
+            walk: 'walking',
+            run: 'running',
+            ride: 'cycling',
+            swim: 'swimming'
+        }
+        const activityTypes = types.map((t) => {
+            return activityTypeConversion[t.toLowerCase()]
+        })
+        const summaryText = `${activityTypes.join(', ').replace(/^\w/, c => c.toUpperCase())} activities for "${filterText}": ${names.join(', ')}.`
+        if ( filteredActivities.length > 0 && filteredActivities.length <= 20 ) {
+            this.setState({ summaryText: summaryText });
+        } else {
+            this.setState({ summaryText: "" });
+        }
+    }
+
     render() {
 
-        const { allActivities, allActivityTypes, minDateLimit, maxDateLimit, durationLimits } = this.state;
+        const { name, summaryText, allActivities, allActivityTypes, minDateLimit, maxDateLimit, durationLimits } = this.state;
 
         if ( allActivities.length > 0 ) {
             return (
                 <div>
+                    {summaryText !== "" &&
+                        <Helmet>
+                            <meta name='description' content={summaryText} />
+                            <meta name ="robots" content="index" />
+                            <title>Activity Map {name && name !== '' ? '- '+name : ''}</title>
+                        </Helmet>
+                    }
                     <MapAndSideBar
+                        user={'nick'}
+                        name={name}
+                        getActivitySummary={this.getActivitySummary}
+                        setNameFilter={this.setNameFilter}
                         allActivities={allActivities}
                         allActivityTypes={allActivityTypes}
                         minDateLimit={minDateLimit}

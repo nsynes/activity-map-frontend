@@ -9,6 +9,7 @@ class StravaActivities extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            name: '',
             allActivities: [],
             allActivityTypes: [],
             minDateLimit: new Date(),
@@ -21,6 +22,10 @@ class StravaActivities extends React.Component {
     componentDidMount = () => {
         this.fetchUserPhoto();
         this.fetchActivities(0);
+    }
+
+    setNameFilter = (e) => {
+        this.setState({ name: e.target.value })
     }
 
     fetchUserPhoto = () => {
@@ -73,12 +78,15 @@ class StravaActivities extends React.Component {
 
     render() {
 
-        const { allActivities, allActivityTypes, minDateLimit, maxDateLimit, durationLimits, photo } = this.state;
+        const { name, allActivities, allActivityTypes, minDateLimit, maxDateLimit, durationLimits, photo } = this.state;
 
         if ( allActivities.length > 0 ) {
             return (
                 <div>
                     <MapAndSideBar
+                        user={'strava'}
+                        name={name}
+                        setNameFilter={this.setNameFilter}
                         allActivities={allActivities}
                         allActivityTypes={allActivityTypes}
                         minDateLimit={minDateLimit}

@@ -28,9 +28,15 @@
     width: 100%;
     background-image: linear-gradient(to right, rgba(211, 84, 0, 0.1), rgba(211, 84, 0, 1), rgba(211, 84, 0, 0.1));
 }
-
 h1 {
     position: relative;
     padding: 0;
     margin: 2em 0;
+}
+ul, li {
+    list-style-type: none;
+    padding: 0;
+}
+a:hover {
+    text-decoration: underline;
 }
