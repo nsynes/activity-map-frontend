@@ -44,6 +44,7 @@ class MapAndSideBar extends React.Component {
     }
 
     filterActivities = (nextProps) => {
+        console.log('filterActivities', nextProps)
         if ( nextProps.allActivities.length > 0) {
             const filteredActivities = nextProps.allActivities.filter((activity) => this.filterActivity(activity));
             this.setState({ filteredActivities: filteredActivities })
