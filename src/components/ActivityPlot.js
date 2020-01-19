@@ -28,7 +28,7 @@ class ActivityPlot extends React.Component {
         if (this.props.selectedActivity !== prevProps.selectedActivity) {
             this.setState({loading: true});
             this.getActivityStreams(this.props.selectedActivity);
-            this.getActivity(this.props.selectedActivity)
+            //this.getActivity(this.props.selectedActivity)
             //this.getActivityPhotos(this.props.selectedActivity)
         }
     }
