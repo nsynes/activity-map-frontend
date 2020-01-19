@@ -93,7 +93,6 @@ class StravaActivities extends React.Component {
                         maxDateLimit={maxDateLimit}
                         durationLimits={durationLimits}
                         photo={photo}
-
                     />
                 </div>
             );

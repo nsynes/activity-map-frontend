@@ -81,7 +81,7 @@ class ActivityPlot extends React.Component {
     }
 
     render() {
-        const { time, distance, altitude, velocity_smooth, heartrate, cadence, watts, temp, moving, grade_smooth, loading } = this.state;
+        const { loading, distance, altitude } = this.state; //time, velocity_smooth, heartrate, cadence, watts, temp, moving, grade_smooth } = this.state;
 
         return(
             <div>

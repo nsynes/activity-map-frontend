@@ -35,21 +35,23 @@ class Map extends React.Component {
 
     render() {
         const { windowHeight } = this.state;
-        const { filteredActivities, startEndPoints } = this.props;
+        const { allActivities, activitiesToDisplay, startEndPoints } = this.props;
 
-        const activityGeoJson = [];
-        if ( filteredActivities.length > 0 ) {
-            filteredActivities.forEach((activity) => {
-                activityGeoJson.push(
-                    <GeoJSON
-                        data={activity}
-                        key={activity.properties.id}
-                        ref={`geoJson${activity.properties.id}`}
-                        style={this.styleGeoJson}
-                        onEachFeature={(feature, layer) => {this.stylePopups(feature, layer)}}
-                        onClick={(event) => {this.props.selectActivity(event)}}
-                    />
-                )
+        var activityGeoJson = [];
+        if ( allActivities.length > 0 ) {
+            allActivities.forEach((activity, index) => {
+                if ( activitiesToDisplay[index] ) {
+                    activityGeoJson.push(
+                        <GeoJSON
+                            data={activity}
+                            key={activity.properties.id}
+                            ref={`geoJson${activity.properties.id}`}
+                            style={this.styleGeoJson}
+                            onEachFeature={(feature, layer) => {this.stylePopups(feature, layer)}}
+                            onClick={(event) => {this.props.selectActivity(event)}}
+                        />
+                    )
+                }
             })
         }
         var markers = [];

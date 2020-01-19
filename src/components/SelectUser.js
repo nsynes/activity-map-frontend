@@ -13,7 +13,7 @@ const SelectUser = (props) => {
         <div align='center' style={{width: '100%', height: '100vh', background: 'radial-gradient(80% 80% at center, #ececec, white)'}}>
             <Helmet>
                 <meta name='description' content='Web app to display all your Strava activities on a single filterable map.' />
-                <meta name ="robots" content="index,follow" />
+                <meta name="robots" content="index,follow" />
                 <title>Activity Map</title>
             </Helmet>
             <h1 id='main-title'>

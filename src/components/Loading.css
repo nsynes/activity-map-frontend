@@ -9,8 +9,13 @@
     padding: 20% 0;
     width: 100%;
     text-align: center;
-  }
-
+}
+.activities-loading {
+    z-index: 100;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
