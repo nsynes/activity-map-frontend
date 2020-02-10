@@ -20,7 +20,8 @@ class ActivityPlot extends React.Component {
             watts: null,
             temp: null,
             moving: null,
-            grade_smooth: null
+            grade_smooth: null,
+            activityPhotos: []
         }
     }
     componentDidUpdate = (prevProps) => {
@@ -29,7 +30,7 @@ class ActivityPlot extends React.Component {
             this.setState({loading: true});
             this.getActivityStreams(this.props.selectedActivity);
             //this.getActivity(this.props.selectedActivity)
-            //this.getActivityPhotos(this.props.selectedActivity)
+            this.getActivityPhotos(this.props.selectedActivity)
         }
     }
 
@@ -51,7 +52,8 @@ class ActivityPlot extends React.Component {
         fetch(`${API_URL_GetActivityPhotos}/${id}`, {  credentials: 'include' })
             .then(handleResponse)
             .then((result) => {
-                console.log('getActivityPhotos', result)
+                console.log('photos', result)
+                this.setState({activityPhotos: result.map((photoObj) => photoObj.urls[600])})
             })
     }
 
@@ -83,6 +85,10 @@ class ActivityPlot extends React.Component {
     render() {
         const { loading, distance, altitude } = this.state; //time, velocity_smooth, heartrate, cadence, watts, temp, moving, grade_smooth } = this.state;
 
+        const photos = this.state.activityPhotos.map((photoUrl, index) => {
+            return <img alt={{index}} key={{index}} src={photoUrl} style={{ position: 'relative', width: '100%' }}></img>
+        });
+
         return(
             <div>
                 { loading && <div className='loading-container'><Loading
@@ -101,7 +107,7 @@ class ActivityPlot extends React.Component {
                         margin: {
                             l: 30,
                             r: 30,
-                            b: 30,
+                            b: 50,
                             t: 0,
                             pad: 0
                         },
@@ -119,6 +125,7 @@ class ActivityPlot extends React.Component {
                     style={{ position: 'relative', width: '100%', top: '1em' }}
                     config={ {displayModeBar: false} }
                     /> }
+                    { this.state.activityPhotos.length > 0 && photos}
             </div>
         )
     }
