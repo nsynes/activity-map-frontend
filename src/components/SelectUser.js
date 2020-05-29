@@ -37,6 +37,7 @@ const SelectUser = (props) => {
             <div style={{maxWidth: 500, paddingTop: '2em'}}>
                 <b>Activity highlights:</b>
                 <ul>
+                    <li><a href='/NicksActivities/Capital%20Ring'>Capital Ring, London</a></li>
                     <li><a href='/NicksActivities/Thames%20Path'>Thames Path, National Trail</a></li>
                     <li><a href='/NicksActivities/Offas%20Dyke'>Offa's Dyke Path, National Trail</a></li>
                     <li><a href='/NicksActivities/Hadrians%20Wall'>Hadrian's Wall Path, National Trail</a></li>
