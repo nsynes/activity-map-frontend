@@ -38,10 +38,11 @@ const SelectUser = (props) => {
                 <b>Activity highlights:</b>
                 <ul>
                     <li><a href='/NicksActivities/Capital%20Ring'>Capital Ring, London</a></li>
-                    <li><a href='/NicksActivities/Thames%20Path'>Thames Path, National Trail</a></li>
-                    <li><a href='/NicksActivities/Offas%20Dyke'>Offa's Dyke Path, National Trail</a></li>
+                    <li><a href='/NicksActivities/Cotswold%20Way'>Cotswold Way, National Trail</a></li>
                     <li><a href='/NicksActivities/Hadrians%20Wall'>Hadrian's Wall Path, National Trail</a></li>
+                    <li><a href='/NicksActivities/Offas%20Dyke'>Offa's Dyke Path, National Trail</a></li>
                     <li><a href='/NicksActivities/South%20Downs%20Way'>South Downs Way, National Trail</a></li>
+                    <li><a href='/NicksActivities/Thames%20Path'>Thames Path, National Trail</a></li>
                     <li><a href='/NicksActivities/Dartmoor'>Dartmoor Hike, South -> North</a></li>
                     <li><a href='/NicksActivities/IMW'>Ironman Wales, 2015</a></li>
                 </ul>
